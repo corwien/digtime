@@ -178,6 +178,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // 信息提示包[20170411]
+        Laracasts\Flash\FlashServiceProvider::class,
+
     ],
 
     /*

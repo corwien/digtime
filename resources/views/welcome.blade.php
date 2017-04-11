@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Digtime.cn
                 </div>
 
                 <div class="links">

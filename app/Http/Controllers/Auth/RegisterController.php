@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Mailer\UserMailer;
 
 class RegisterController extends Controller
 {
@@ -62,7 +63,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -70,7 +71,21 @@ class RegisterController extends Controller
             'phone'    => '',
             'confirmation_token' => str_random(40),
             'api_token' => str_random(60),   // api_token认证
+            'settings' => ['city' => ''],
         ]);
 
+        $this->sendVerifyEmailTo($user);
+
+        return $user;
+    }
+
+    /**
+     * 邮箱验证
+     * @param $user
+     */
+    public function sendVerifyEmailTo($user)
+    {
+        $userObject = new UserMailer();
+        $userObject->confirmEmail($user);
     }
 }

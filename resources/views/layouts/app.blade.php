@@ -24,6 +24,7 @@
     <div id="app">
 
         @include('layouts._header')
+        @include('shared.messages')
         @yield('content')
         @include('layouts._footer')
     </div>

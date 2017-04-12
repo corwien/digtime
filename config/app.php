@@ -181,6 +181,9 @@ return [
         // 信息提示包[20170411]
         Laracasts\Flash\FlashServiceProvider::class,
 
+        // 邮件【20170412】
+        Naux\Mail\SendCloudServiceProvider::class,
+
     ],
 
     /*

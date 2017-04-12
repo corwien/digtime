@@ -17,4 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// 邮箱注册验证
+Route::get('email/verify/{token}', ['as' => 'email.verify', 'uses' => 'EmailController@verify'] );
+
 Route::get('/home', 'HomeController@index');

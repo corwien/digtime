@@ -15,6 +15,9 @@ require('./bootstrap');
 
 Vue.component('example', require('./components/Example.vue'));
 
+// 设置头像
+Vue.component('avatar', require('./components/Avatar.vue'));
+
 const app = new Vue({
     el: '#app'
 });

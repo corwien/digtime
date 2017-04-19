@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Mail;
 use App\Mailer\UserMailer;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -36,6 +37,21 @@ class User extends Authenticatable
     protected $casts = [
         'settings' => 'array'
     ];
+
+    /**
+     * 重写重置密码的邮件发送通知，覆盖zhihu_app_reset_password底层的发送方法
+     * 对这个类进行重写： \Illuminate\Contracts\Auth\PasswordBroker
+     *  $user->sendPasswordResetNotification(
+     *   $this->tokens->create($user)
+     *   );
+     * 类文件：Passwords\PasswordBroker
+     * @param $token
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        // 重构发送邮件
+        (new UserMailer())->resetPassword($token, $this->email);
+    }
 
 
 

@@ -184,6 +184,9 @@ return [
         // 邮件【20170412】
         Naux\Mail\SendCloudServiceProvider::class,
 
+        // Laravel-admin[20170419]
+        Encore\Admin\Providers\AdminServiceProvider::class,
+
     ],
 
     /*

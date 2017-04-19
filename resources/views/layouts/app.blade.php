@@ -27,6 +27,7 @@
         @include('shared.messages')
         @yield('content')
         @include('layouts._footer')
+
     </div>
 
     <!-- Scripts -->

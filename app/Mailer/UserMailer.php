@@ -20,6 +20,11 @@ class UserMailer extends Mailer
         $this->sendTo("digtime_app_new_user_follow", $email, $data);
     }
 
+    /**
+     * 重置密码邮箱
+     * @param $token
+     * @param $email
+     */
     public function resetPassword($token, $email)
     {
         // 模板变量

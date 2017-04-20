@@ -20,6 +20,9 @@ class ArticlesController extends Controller
     public function __construct(Markdown $markdown)
     {
         $this->markdown = $markdown;
+
+        // 未登录的用户，某些动作不能操作
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**

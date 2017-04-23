@@ -34,5 +34,18 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}"></script>
+
+    <!-- 实例化MD编辑器 -->
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+    <!-- 在项目中引入其他js,如simplemd时，必须将编辑器引用写在js区域内，否则会找不到对象 -->
+    @yield('js')
+
+    <!-- Scripts  代码高亮初始化加载 -->
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+
+
 </body>
 </html>

@@ -32,6 +32,12 @@ window.axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest'
 };
 
+// 引入markdown编辑器
+// window.simplemde = require('simplemde');
+
+window.hljs = require('./vendor/highlight.min');
+window.simplemde = require('./vendor/simplemde.min');
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

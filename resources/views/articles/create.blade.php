@@ -12,16 +12,20 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="title">标题</label>
-                                <input type="text" name="title" value="{{ old('title') }}" class="form-control" placeholder="标题" id="title">
+                                <input type="text" name="title" required="require"
+                                       value="{{ old('title') }}" class="form-control" placeholder="标题" id="title">
                             </div>
 
                             <!-- 编辑器容器 -->
+
+                            <label for="content">内容</label>
                             <div class="form-group">
-                                <label for="content">内容</label>
-                                <textarea class="form-control" name="content" placeholder="内容">
-                                     {{ old('content') }}
+                                <textarea name="content" class="form-control" rows="20" cols="50"  id="editor">
+
+                                    {{ old('content') }}
                                 </textarea>
                             </div>
+
                             <button class="btn btn-success pull-right" type="submit">发布问题</button>
                         </form>
                     </div>
@@ -29,6 +33,22 @@
             </div>
     </div>
 
+  @section('js')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var simplemde = new SimpleMDE({
+               autofocus: true,
+                autosave: {
+                    enabled: true,
+                    delay: 5000,
+                    unique_id: "editor01",
+                },
+                element: document.getElementById("editor"),
+                spellChecker: false,
+            });
+        });
+    </script>
+  @endsection
 @endsection
 
 

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
-        <div class="col-md-offset-1 col-md-10">
+
           <div class="navbar-header">
 
                 <!-- Collapsed Hamburger -->
@@ -52,6 +52,5 @@
                     @endif
                 </ul>
           </div>
-        </div>
     </div>
 </nav>

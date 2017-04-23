@@ -49,7 +49,7 @@ return [
         'disk' => 'admin',
 
         'directory'  => [
-            'image'  => 'image',
+            'image'  => 'images',
             'file'   => 'file',
         ],
 

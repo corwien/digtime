@@ -1,6 +1,9 @@
-
-
+html,
 body {
+    height: 100%;
+    font-size: 15px;
+    color: #525252;
+    font-family: NotoSansHans-Regular,AvenirNext-Regular,arial,Hiragino Sans GB,"Microsoft Yahei","Hiragino Sans GB","WenQuanYi Micro Hei",sans-serif;
     background:#f1f1f1; /* 仿youtube背景色 */
 }
 
@@ -8,6 +11,80 @@ body {
     background-color: #fff;
     border:none;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+textarea.form-control{
+    font-size: 15px;
+    line-height: 30px;
+}
+
+.panel {
+    border: 1px solid #eaeaea;
+}
+
+.loading {
+    font-size: 15px;
+}
+.emoji {
+    width: 1.6em;
+    display: inline-block;
+    margin-bottom: 0;
+    margin-top: -5px;
+    margin-left: 5px;
+}
+
+.main-col {
+    padding-left: 0px;
+}
+.side-bar {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.left-col {
+    padding-left: 15px;
+    padding-right: 0px;
+}
+
+.topics-show .panel .panel-heading, .blog-pages .panel .panel-heading {
+    padding-bottom: 12px;
+    padding: 15px 22px;
+}
+
+.content-body {
+    .markdown-body {
+      overflow: visible;
+
+        pre, pre[class*=language-] {
+            border-radius: 0px;
+        }
+}
+}
+
+.panel {
+  .panel-heading {
+    color: #333;
+    background-color: #fcfcfc;
+    /* border-color: #F5F5F5; */
+    border: 1px solid #ddd;
+    border-bottom:none;
+    h3 {
+      color: #999;
+      font-size: 14px;
+    }
+  }
+  .panel-body {
+    border: 1px solid #ddd;
+  }
+  .panel-footer {
+    border-top:none;
+    background-color: #fcfcfc;
+  }
+}
+
+.entry-content {
+    padding: 22px;
 }
 
 /* footer */

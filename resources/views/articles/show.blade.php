@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-        <div class="blog-pages">
-            <div class="col-md-10 col-md-offset-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-1">
                 <div class="panel article-body content-body">
                     <div class="panel-body">
                         <h1 class="text-center">
@@ -21,7 +22,7 @@
                         </div>
 
                         <div class="entry-content">
-                            <div class="markdown" id="emojify">
+                            <div class="markdown" >
                                 {!! $article->content !!}
                             </div>
                         </div>
@@ -29,7 +30,9 @@
                     </div>
                 </div>
             </div>
+
         </div>
+    </div>
 @endsection
 
 

@@ -13,7 +13,6 @@ body {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
-
 textarea.form-control{
     font-size: 15px;
     line-height: 30px;
@@ -21,6 +20,14 @@ textarea.form-control{
 
 .panel {
     border: 1px solid #eaeaea;
+}
+
+.media {
+    border: 1px solid #eaeaea;
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 15px 22px;
+    border-radius: 4px;
 }
 
 .loading {
@@ -75,7 +82,8 @@ textarea.form-control{
     }
   }
   .panel-body {
-    border: 1px solid #ddd;
+      border: 1px solid #ddd;
+      border-radius: 4px;
   }
   .panel-footer {
     border-top:none;
@@ -85,6 +93,11 @@ textarea.form-control{
 
 .entry-content {
     padding: 22px;
+}
+
+/* 头像 */
+.avatar {
+    border-radius: 50%;
 }
 
 /* footer */

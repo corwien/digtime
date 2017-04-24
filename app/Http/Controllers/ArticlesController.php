@@ -6,19 +6,24 @@ use App\Markdown\Markdown;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Auth;
+use App\Repositories\ArticleRepository;
 
 class ArticlesController extends Controller
 {
 
     protected $markdown;
 
+    protected $articleRepository;
+
     /**
      * ArticlesController constructor.
      *
      * @param $markdown
      */
-    public function __construct(Markdown $markdown)
+    public function __construct(ArticleRepository $articleRepository, Markdown $markdown)
     {
+        $this->articleRepository = $articleRepository;
+
         $this->markdown = $markdown;
 
         // 未登录的用户，某些动作不能操作
@@ -32,7 +37,9 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::paginate(5);
+
+        return view('articles.index', compact('articles'));
     }
 
     /**
@@ -76,7 +83,7 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        $article = Article::findOrFail($id);
+        $article = $this->articleRepository->byId($id);
         $article->content = $this->markdown->markdown($article->content);
         return view('articles.show', compact('article'));
     }

@@ -187,6 +187,9 @@ return [
         // Laravel-admin[20170419]
         Encore\Admin\Providers\AdminServiceProvider::class,
 
+        // youdao[20170427]
+        JellyBool\Translug\TranslugServiceProvider::class,
+
     ],
 
     /*
@@ -235,6 +238,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'Translug' => JellyBool\Translug\TranslugFacade::class,
 
     ],
 

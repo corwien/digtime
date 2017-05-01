@@ -15,6 +15,7 @@ class Article extends Model
         'slug',
         'subtitle',
         'published_at',
+        'views_count',
     ];
 
     /**

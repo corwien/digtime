@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    // 有道翻译
+    'youdao' => [
+        'key'  => env('YOUDAO_API_KEY'),
+        'from' => env('YOUDAO_KEY_FROM'),
+    ]
+
 ];

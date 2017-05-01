@@ -9,6 +9,7 @@
         "caouecs/laravel-lang": "~3.0",
         "encore/laravel-admin": "1.4.*",
         "guzzlehttp/guzzle": "^6.2",
+        "jellybool/translug": "^1.0",
         "laracasts/flash": "^2.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",

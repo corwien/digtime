@@ -85,6 +85,9 @@ class ArticlesController extends Controller
     {
         $article = $this->articleRepository->byId($id);
         $article->content = $this->markdown->markdown($article->content);
+
+        // 增加浏览量
+        $article->increment('views_count');
         return view('articles.show', compact('article'));
     }
 

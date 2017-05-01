@@ -4,14 +4,16 @@ namespace App\Admin\Controllers;
 
 use App\Models\Article;
 use App\Models\User;
+use Encore\Admin\Auth\Permission;
 use Auth;
-
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class ArticlesController extends Controller
 {
@@ -50,6 +52,8 @@ class ArticlesController extends Controller
         });
     }
 
+
+
     /**
      * Create interface.
      *
@@ -57,6 +61,10 @@ class ArticlesController extends Controller
      */
     public function create()
     {
+
+        // 检查权限，有create-article权限的用户或者角色可以访问创建文章页面
+        Permission::check('create-article');
+
         return Admin::content(function (Content $content) {
 
             $content->header('header');
@@ -64,6 +72,37 @@ class ArticlesController extends Controller
 
             $content->body($this->form());
         });
+    }
+
+
+    /**
+     *  重写 store 方法
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function store()
+    {
+        $data = Input::all();
+
+        // 将标题处理为slug格式
+        $data['slug'] = app('translug')->translug($data['title']);
+
+        // 重写方法，并传入参数
+        return $this->form()->store_v2($data);
+    }
+
+    /**
+     *  重写 update 方法
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function update($id)
+    {
+        $data = Input::all();
+
+        // 将标题处理为slug格式
+        $data['slug'] = app('translug')->translug($data['title']);
+
+        // 重写方法，并传入参数
+        return $this->form()->update_v2($id, $data);
     }
 
     /**
@@ -95,14 +134,16 @@ class ArticlesController extends Controller
      */
     protected function form()
     {
-        return Admin::form(Article::class, function (Form $form) {
+        $author_id = user()->id;
+
+        // src/Form.php  这个方法可以获取表单里的值  Illuminate\Http\Request;
+        return Admin::form(Article::class, function (Form $form) use ($author_id) {
 
             $form->display('id', 'ID');
             $form->text('title', '标题')->rules('required|min:3');
             $form->text('subtitle', '副标题');
-
-            $form->text('user_id', '作者ID')->default(4);
-            $form->text('slug', 'Slug')->default('My-blog-4');
+            $form->text('user_id', '作者ID')->default($author_id);
+            $form->hidden('slug');
             $form->text('category_id', '分类ID')->default(1);
             $form->text('order', '排序')->default(1);
             $form->radio('is_excellent', '是否精华')->options(['F' => '否', 'T' => '是'])->default('T');

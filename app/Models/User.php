@@ -34,9 +34,11 @@ class User extends Authenticatable
      * 该字段将会自动en/decode json
      * @var array
      */
+    /*
     protected $casts = [
         'settings' => 'array'
     ];
+    */
 
     /**
      * 重写重置密码的邮件发送通知，覆盖zhihu_app_reset_password底层的发送方法

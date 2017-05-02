@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->integer('followers_count')->default(0);
             $table->integer('followings_count')->default(0);
             $table->string('api_token', 64)->unique();
-            $table->json('settings')->nullable();
+            $table->text('settings');
             $table->rememberToken();
             $table->timestamps();
         });

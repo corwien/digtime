@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div style="padding:2px;background:#ffffff;margin-top:150px;">
+                <div style="padding:15px;background:#ffffff;margin-top:150px;">
                     <div id="category"><b>文章目录</b><br/></div>
                 </div>
             </div>

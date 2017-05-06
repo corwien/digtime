@@ -39,6 +39,16 @@ class ArticlesController extends Controller
     {
         $articles = Article::paginate(5);
 
+
+        foreach($articles as $k => $article)
+        {
+            $content = $this->markdown->markdown($article->content);
+
+            // 去除html标签
+            $content = strCut($content);
+            $articles[$k]->content = $content;
+        }
+
         return view('articles.index', compact('articles'));
     }
 

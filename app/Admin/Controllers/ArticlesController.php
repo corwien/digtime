@@ -123,6 +123,7 @@ class ArticlesController extends Controller
             });
 
             $grid->created_at();
+            $grid->model()->orderBy('created_at', 'desc');
             $grid->updated_at();
         });
     }

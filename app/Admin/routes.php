@@ -19,4 +19,7 @@ Route::group([
     // 博客文章路由
     $router->resource('articles', ArticlesController::class);
 
+    // 分类
+    $router->resource('categories', CategoriesController::class);
+
 });

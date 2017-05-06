@@ -31,17 +31,17 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div style="padding:15px;background:#ffffff;margin-top:150px;">
+                <div id="category-menu" style="padding:15px;background:#ffffff;margin-top:150px;">
                     <div id="category"><b>文章目录</b><br/></div>
                 </div>
             </div>
             @section('js')
-                <script>hljs.initHighlightingOnLoad();</script>
                 <script type="text/javascript">
                     $(document).ready(function(){
                         $("h2,h3,h4,h5,h6").each(function(i,item){
                             var tag = $(item).get(0).localName;
-                            $(item).attr("id","wow"+i);
+
+                            $(item).attr("id","wow"+i);  // 添加标签属性，增加锚点
                             $("#category").append('<a class="new'+tag+'" href="#wow'+i+'">'+$(this).text()+'</a></br>');
                             $(".newh2").css("margin-left",0);
                             $(".newh3").css("margin-left",20);
@@ -49,10 +49,16 @@
                             $(".newh5").css("margin-left",60);
                             $(".newh6").css("margin-left",80);
                         });
+
+                        if($("h2").is(':empty'))
+                        {
+                            $("#category-menu").hide();
+                        }
                     });
                 </script>
             @endsection
         </div>
+        @include("comments.create")
     </div>
 
 @endsection

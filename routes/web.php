@@ -40,3 +40,6 @@ Route::resource('articles', 'ArticlesController', ['names' =>
     ['show' => 'article.show'],
     ['edit' => 'article.edit'],
 ]);
+
+// 评论路由
+Route::Post('/articles/{comment}/comment', 'CommentsController@store');

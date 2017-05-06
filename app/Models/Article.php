@@ -27,12 +27,12 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
 
+
     /**
-     * 获取当前登录用户ID
-     * @return mixed
+     * 获取所有问题的评论
      */
-    public function auth_id()
+    public function comments()
     {
-        return Auth::id();
+        return $this->morphMany('App\Models\Comment', 'commentable');
     }
 }

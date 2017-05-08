@@ -4,9 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 
 class UsersController extends Controller
 {
+    public function show($user_id)
+    {
+        // 获取用户信息
+        $user = User::findOrFail($user_id);
+        // $url = route('profile', ['user_id' => $user_id]);
+        // dd($url);
+        // "http://digtime.app/user/4"
+
+        $name = Route::currentRouteName();
+        dd($name);
+
+
+        return view('users.show', compact('user'));
+    }
     public function avatar()
     {
         return view('users.avatar');

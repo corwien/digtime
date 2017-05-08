@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Article;
+
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Article;
 
 class Comment extends Model
 {

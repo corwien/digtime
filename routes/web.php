@@ -43,3 +43,12 @@ Route::resource('articles', 'ArticlesController', ['names' =>
 
 // 评论路由
 Route::Post('/articles/{comment}/comment', 'CommentsController@store');
+
+// 用户页
+Route::get('user/{user_id}', 'UsersController@show');
+
+// 路由群组-登录，如果未登录则跳转到登录页
+Route::group(['middleware' => 'auth'], function(){
+    // 用户页
+   // Route::get('user/{user_id}', 'UsersController@show');
+});

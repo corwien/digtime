@@ -7,7 +7,7 @@
                 @foreach($articles as $article)
                     <div class="media">
                         <div class="media-left">
-                            <a href="">
+                            <a href="/user/{{ $article->user_id }}">
                                 <img width="60px" class="avatar" src="{{ $article->user->avatar }}" alt="{{ $article->user->name }}">
                             </a>
                         </div>

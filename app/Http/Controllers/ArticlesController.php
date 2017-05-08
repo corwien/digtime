@@ -93,6 +93,9 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
+        // $environment = config('app.locale');
+        // dump($environment);
+
         $article = $this->articleRepository->byId($id);
         $article->content = $this->markdown->markdown($article->content);
 

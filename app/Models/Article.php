@@ -16,6 +16,7 @@ class Article extends Model
         'subtitle',
         'published_at',
         'views_count',
+        'comments_count',
     ];
 
     /**

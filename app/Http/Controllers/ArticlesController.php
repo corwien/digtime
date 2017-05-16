@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Repositories\ArticleRepository;
 
+// Log 日志
+use Illuminate\Support\Facades\Log;
+
 class ArticlesController extends Controller
 {
 
@@ -95,6 +98,9 @@ class ArticlesController extends Controller
     {
         // $environment = config('app.locale');
         // dump($environment);
+
+        // 测试Log方法
+        // Log::info('show article id' . $id);
 
         $article = $this->articleRepository->byId($id);
         $article->content = $this->markdown->markdown($article->content);

@@ -27,4 +27,14 @@ class Mailer
 
     }
 
+
+    /**
+     * TODO::这里以后用队列处理
+     */
+    public function sendToQueue()
+    {
+
+
+    }
+
 }

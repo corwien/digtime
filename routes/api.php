@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// 评论
+Route::get('article/{id}/comments', 'CommentsController@article');
+
+// 评论
+Route::get('article/test', function(){
+    $arr = json_encode(array('user_id' => 10086));
+    return $arr;
+});

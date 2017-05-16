@@ -3,25 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCommentRequest;
+use App\Repositories\ArticleRepository;
 use Illuminate\Http\Request;
 use App\Repositories\CommentRepository;
 use Auth;
 
+
 class CommentsController extends Controller
 {
     protected $commentRepository;
+
+    protected $article;
 
     /**
      * CommentsController constructor.
      *
      * @param $commentRepository
      */
-    public function __construct(CommentRepository $commentRepository)
+    public function __construct(CommentRepository $commentRepository, ArticleRepository $article)
     {
         // 未登录的用户，某些动作不能操作
-        $this->middleware('auth')->except(['index', 'show']);
+        // $this->middleware('auth')->except(['index', 'show', 'article']);
 
         $this->commentRepository = $commentRepository;
+        $this->article = $article;
     }
 
     /**
@@ -32,6 +37,17 @@ class CommentsController extends Controller
     public function index()
     {
         //
+    }
+
+    /**
+     * 获取作品评论
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function article($id)
+    {
+        return $this->article->getArticleCommentsById($id);
     }
 
     /**

@@ -18,6 +18,8 @@
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
+
+        Laravel.apiToken = "{{ Auth::check() ? 'Bearer '.Auth::user()->api_token : 'Bearer ' }}";
     </script>
 </head>
 <body>
@@ -30,6 +32,10 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}"></script>
+
+    <!-- 广播通知
+    <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
+     -->
 
     <!-- 实例化MD编辑器 -->
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>

@@ -18,6 +18,9 @@ Vue.component('example', require('./components/Example.vue'));
 // 设置头像
 Vue.component('avatar', require('./components/Avatar.vue'));
 
+// 评论
+Vue.component('comments', require('./components/Comments.vue'));
+
 const app = new Vue({
     el: '#app'
 });

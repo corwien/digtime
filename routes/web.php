@@ -52,3 +52,6 @@ Route::group(['middleware' => 'auth'], function(){
     // 用户页
    // Route::get('user/{user_id}', 'UsersController@show');
 });
+
+// 评论
+Route::get('article/{id}/comments', 'CommentsController@article');

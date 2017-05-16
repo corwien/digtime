@@ -58,7 +58,13 @@
                 </script>
             @endsection
         </div>
-        @include("comments.create")
+
+        <!-- 评论Vue -->
+        <comments
+                type="article"
+                model="{{ $article->id }}"
+                count="{{ $article->comments_count }}"
+        ></comments>
     </div>
 
 @endsection

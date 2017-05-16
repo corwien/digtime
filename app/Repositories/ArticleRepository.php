@@ -21,7 +21,18 @@ class ArticleRepository
         return Article::findOrFail($id);
     }
 
-    public function foo(){
+    /**
+     * 获取作品评论
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function getArticleCommentsById($id)
+    {
+        // $article = Article::find($id);
+       $article = Article::with('comments', 'comments.user')
+          ->where('id', $id)->first();
+        return $article->comments;
 
     }
 

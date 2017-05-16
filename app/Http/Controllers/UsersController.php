@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendReminderEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
@@ -15,13 +16,11 @@ class UsersController extends Controller
         // $url = route('profile', ['user_id' => $user_id]);
         // dd($url);
         // "http://digtime.app/user/4"
-
-        $name = Route::currentRouteName();
-        dd($name);
-
+        // dispatch(new sendReminderEmail($user));
 
         return view('users.show', compact('user'));
     }
+
     public function avatar()
     {
         return view('users.avatar');

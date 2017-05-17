@@ -10,8 +10,8 @@
                     <div class="panel-body">
                        <div v-if="comments.length > 0">
                             <div class="media" v-for="comment in comments">
-                                <div class="media-left"> 
-                                <a href="#">
+                                <div class="media-left">
+                                    <a :href="'/user/' + comment.user_id">
                                     <!-- 注意：这里的图片src，href 需要使用Vue中的资源特殊写法，否则编译不过去 -->
                                       <img width="36px" class="media-object" :src="comment.user.avatar"> 
                                 </a> 
@@ -53,27 +53,21 @@
             }).then((response) => {
                this.comments = response.data;
             })
-                /*
-                 测试方法
-                axios.get('/api/article/test', {
-                }).then((response) => {
-                    console.log(response.data);
-                })
-                */
+
         },
-        methods:{
-            getComments(){
-                axios.get('/api/' + this.type + '/' + this.model + "/comments", {
+        methods: {
+            // 发送评论
+            store(){
+                axios.post('/api/comment', {
+                    'type': this.type, 'model': this.model, 'content': this.content
                 }).then((response) => {
 
-                    console.log(response.data);
-
-                    this.comments = response.data;
+                    console.log(response);
+                     this.comments.push(response.data)
+                     this.content = ''
+                     this.count ++
 
                 })
-            },
-            store(){
-
             }
         }
 

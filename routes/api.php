@@ -20,8 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // 评论
 Route::get('article/{id}/comments', 'CommentsController@article');
 
-// 评论
-Route::get('article/test', function(){
-    $arr = json_encode(array('user_id' => 10086));
-    return $arr;
-});
+// 评论保存
+Route::post('comment', 'CommentsController@store');
+

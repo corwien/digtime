@@ -66,24 +66,28 @@ class CommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCommentRequest $request, $article)
+    public function store()
     {
         // 这里默认暂时写死先
-        $model = $this->getModelNameFromType($type = "article");
+        $type = $this->getModelNameFromType(request('type'));
 
         $data = [
-            'commentable_type' => $model,   // 多态模式
-            'commentable_id'   => $article, // 多态ID
-             'content'         => $request->get('content'),
-            'user_id'          => Auth::id(),
+            'commentable_type' => $type,   // 多态模式
+            'commentable_id'   => request('model'), // 多态ID
+            'content'          => request('content'),
+            'user_id'          => Auth::guard('api')->user()->id,
         ];
         $comment = $this->commentRepository->create($data);
 
         // 增加评论数
         $comment->article()->increment('comments_count');
 
-        flash("恭喜你，评论成功！", "success");
-        return back();
+        $user_obj = $comment->user;
+        $comment->user = $user_obj;
+
+        return $comment;
+        // flash("恭喜你，评论成功！", "success");
+        // return back();
 
     }
 

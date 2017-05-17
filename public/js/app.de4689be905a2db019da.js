@@ -16690,27 +16690,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         axios.get('/api/' + this.type + '/' + this.model + "/comments", {}).then(function (response) {
             _this.comments = response.data;
         });
-        /*
-         测试方法
-        axios.get('/api/article/test', {
-        }).then((response) => {
-            console.log(response.data);
-        })
-        */
     },
 
     methods: {
-        getComments: function getComments() {
+        // 发送评论
+        store: function store() {
             var _this2 = this;
 
-            axios.get('/api/' + this.type + '/' + this.model + "/comments", {}).then(function (response) {
+            axios.post('/api/comment', {
+                'type': this.type, 'model': this.model, 'content': this.content
+            }).then(function (response) {
 
-                console.log(response.data);
-
-                _this2.comments = response.data;
+                console.log(response);
+                _this2.comments.push(response.data);
+                _this2.content = '';
+                _this2.count++;
             });
-        },
-        store: function store() {}
+        }
     }
 
 });
@@ -46736,7 +46732,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "media-left"
     }, [_c('a', {
       attrs: {
-        "href": "#"
+        "href": '/user/' + comment.user_id
       }
     }, [_c('img', {
       staticClass: "media-object",

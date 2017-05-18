@@ -16670,6 +16670,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     // 为父组件传递到子组件的属性值，子组件使用props方法接收，model为question_id或answer_id
@@ -16701,7 +16702,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'type': this.type, 'model': this.model, 'content': this.content
             }).then(function (response) {
 
-                console.log(response);
+                // console.log(response);
                 _this2.comments.push(response.data);
                 _this2.content = '';
                 _this2.count++;
@@ -46723,7 +46724,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel panel-default"
   }, [_c('div', {
     staticClass: "panel-heading"
-  }, [_vm._v("\n               评论数：" + _vm._s(_vm.count) + "\n            ")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                       评论数：" + _vm._s(_vm.count) + "\n                    ")]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
   }, [(_vm.comments.length > 0) ? _c('div', _vm._l((_vm.comments), function(comment) {
     return _c('div', {
@@ -46744,9 +46745,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "media-body"
     }, [_c('h4', {
       staticClass: "media-heading"
-    }, [_vm._v(_vm._s(comment.user.name))]), _vm._v("\n                        " + _vm._s(comment.content) + " "), _c('span', {
+    }, [_vm._v(_vm._s(comment.user.name) + " "), _c('span', {
       staticClass: "pull-right"
-    }, [_vm._v(_vm._s(comment.created_at))])])])
+    }, [_vm._v(_vm._s(comment.created_at))]), _vm._v(" "), _c('a', {
+      staticClass: "fa fa-reply",
+      attrs: {
+        "href": "javascript:void(0)"
+      }
+    })]), _vm._v("\n                                " + _vm._s(comment.content) + "\n                                ")])])
   })) : _vm._e()]), _vm._v(" "), _c('div', {
     staticClass: "modal-footer"
   }, [_c('textarea', {

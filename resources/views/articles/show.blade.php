@@ -38,7 +38,7 @@
             @section('js')
                 <script type="text/javascript">
                     $(document).ready(function(){
-                        $("h2,h3,h4,h5,h6").each(function(i,item){
+                        $(".entry-content h2,.entry-content h3,.entry-content h4,.entry-content h5,.entry-content h6").each(function(i,item){
                             var tag = $(item).get(0).localName;
 
                             $(item).attr("id","wow"+i);  // 添加标签属性，增加锚点
@@ -50,10 +50,6 @@
                             $(".newh6").css("margin-left",80);
                         });
 
-                        if($("h2").is(':empty'))
-                        {
-                            $("#category-menu").hide();
-                        }
                     });
                 </script>
             @endsection

@@ -17,9 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// 评论
+// 获取评论列表
 Route::get('article/{id}/comments', 'CommentsController@article');
 
 // 评论保存
-Route::post('comment', 'CommentsController@store');
+Route::post('comment', 'CommentsController@store')->middleware('auth:api');
 

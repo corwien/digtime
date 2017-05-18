@@ -17,8 +17,9 @@
                                 </a> 
                                 </div>
                                 <div class="media-body">
-                                <h4 class="media-heading">{{ comment.user.name }}</h4>
-                                {{ comment.content }} <span class="pull-right">{{ comment.created_at }}</span>
+                                <h4 class="media-heading">{{ comment.user.name }} <span class="pull-right">{{ comment.created_at }}</span>
+<a class="fa fa-reply" href="javascript:void(0)"></a></h4>
+                                {{ comment.content }}
                                 </div>
                             </div>
                        </div>
@@ -62,7 +63,7 @@
                     'type': this.type, 'model': this.model, 'content': this.content
                 }).then((response) => {
 
-                    console.log(response);
+                    // console.log(response);
                      this.comments.push(response.data)
                      this.content = ''
                      this.count ++

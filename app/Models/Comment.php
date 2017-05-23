@@ -11,7 +11,7 @@ class Comment extends Model
 {
     protected $table = 'comments';
 
-    protected $fillable = ['user_id', 'content', 'commentable_id', 'commentable_type'];
+    protected $fillable = ['user_id', 'content', 'parent_id', 'commentable_id', 'commentable_type'];
 
     /**
      * 多态关联允许一个模型在单个关联中从属一个以上其它模型。举个例子，想象一下使用你应用的用户可以「评论」文章和视频。

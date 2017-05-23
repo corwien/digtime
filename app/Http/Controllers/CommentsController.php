@@ -71,10 +71,14 @@ class CommentsController extends Controller
         // 这里默认暂时写死先
         $type = $this->getModelNameFromType(request('type'));
 
+        // dd(request('comment_id'));
+        // 判断是否回复
+        $content = request('reply_content') ? request('reply_content') : request('content');
         $data = [
             'commentable_type' => $type,   // 多态模式
             'commentable_id'   => request('model'), // 多态ID
-            'content'          => request('content'),
+            'content'          => $content,
+            'parent_id'        => (int)request('comment_id'),
             'user_id'          => Auth::guard('api')->user()->id,
         ];
         $comment = $this->commentRepository->create($data);

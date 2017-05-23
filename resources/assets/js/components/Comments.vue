@@ -17,10 +17,13 @@
                                 </a> 
                                 </div>
                                 <div class="media-body">
-                                <h4 class="media-heading">{{ comment.user.name }} <span class="pull-right">{{ comment.created_at }}</span>
-<a class="fa fa-reply" href="javascript:void(0)"></a></h4>
-                                {{ comment.content }}
+                                <h4 class="media-heading">{{ comment.user.name }}
+                                  <small><span class="pull-right">{{ comment.created_at }}</span></small> </h4>
+                                {{ comment.content }}<br/>
+                                 <button class="button is-naked delete-button" v-on:click="showCommentsForm(comment.id)">回复</button> &nbsp;&nbsp;&nbsp;&nbsp;<a class="fa fa-thumbs-o-up"></a>
                                 </div>
+
+
                             </div>
                        </div>
                    </div>
@@ -28,10 +31,24 @@
                     <!-- Modal Actions -->
                     <div class="modal-footer">
                         <textarea class="form-control" rows="5" name="content" v-model="content"></textarea>
+
                         <button type="button" class="btn btn-primary" @click="store">评论</button>
                     </div>
-
                 </div>
+
+                <div class="modal fade" id="reply_comment" tabindex="-1" role="dialog">
+                   <div class="modal-dialog">
+                       <div class="modal-content">
+                           <!-- Modal Actions -->
+                           <div class="modal-footer">
+                             <textarea class="form-control" rows="3" name="reply-content" v-model="reply_content"></textarea>
+                             <button type="button" class="btn btn-primary" @click="store">回复</button>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+
+
             </div>
         </div>
 </template>
@@ -39,12 +56,14 @@
 <script>
     export default {
         // 为父组件传递到子组件的属性值，子组件使用props方法接收，model为question_id或answer_id
-        props:['type', 'model', 'count'],
+        props:['type', 'model', 'count', 'comment_id'],
 
         // 模型绑定数据
         data(){
             return {
                 content : '',
+                reply_content : '',
+                comment_id : '',
                 comments :[],
             }
         },
@@ -60,16 +79,23 @@
             // 发送评论
             store(){
                 axios.post('/api/comment', {
-                    'type': this.type, 'model': this.model, 'content': this.content
+                    'type': this.type, 'model': this.model, 'content': this.content,'reply_content': this.reply_content,'comment_id': this.comment_id
                 }).then((response) => {
 
                     // console.log(response);
                      this.comments.push(response.data)
                      this.content = ''
+                     this.reply_content = ''
+                    $("#reply_comment").modal('hide');
                      this.count ++
 
                 })
+            },
+            showCommentsForm(comment_id){
+                $("#reply_comment").modal('show');
+                this.comment_id = comment_id;
             }
+
         }
 
     }

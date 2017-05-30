@@ -20,6 +20,11 @@ class CommentRepository
         return Comment::create($attributes);
     }
 
+    public function byId($comment_id)
+    {
+        return Comment::find($comment_id);
+    }
+
 
 
 }

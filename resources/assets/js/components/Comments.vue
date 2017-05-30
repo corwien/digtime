@@ -12,18 +12,37 @@
                             <div class="media" v-for="comment in comments">
                                 <div class="media-left">
                                     <a :href="'/user/' + comment.user_id">
-                                    <!-- 注意：这里的图片src，href 需要使用Vue中的资源特殊写法，否则编译不过去 -->
-                                      <img width="36px" class="media-object" :src="comment.user.avatar"> 
-                                </a> 
+                                      <!-- 注意：这里的图片src，href 需要使用Vue中的资源特殊写法，否则编译不过去 -->
+                                        <img width="36px" class="media-object" :src="comment.user.avatar"> 
+                                    </a> 
                                 </div>
                                 <div class="media-body">
-                                <h4 class="media-heading">{{ comment.user.name }}
-                                  <small><span class="pull-right">{{ comment.created_at }}</span></small> </h4>
-                                {{ comment.content }}<br/>
-                                 <button class="button is-naked delete-button" v-on:click="showCommentsForm(comment.id)">回复</button> &nbsp;&nbsp;&nbsp;&nbsp;<a class="fa fa-thumbs-o-up"></a>
+                                    <h4 class="media-heading">{{ comment.user.name }}
+                                      <small><span class="pull-right">{{ comment.created_at }}</span></small> </h4>
+                                    {{ comment.content }}<br/>
+                                     <button class="button is-naked delete-button" v-on:click="showCommentsForm(comment.id)">回复</button> &nbsp;&nbsp;&nbsp;&nbsp;<a class="fa fa-thumbs-o-up"></a>
+
+                                     <!-- 子回复 -->
+                                     <div v-if="comment.sub_comments">
+                                         <div class="media sub-comment" v-for="child_comment in comment.sub_comments">
+
+                                            <div class="media-left">
+                                              <a :href="'/user/' + child_comment.user_id">
+                                                <!-- 注意：这里的图片src，href 需要使用Vue中的资源特殊写法，否则编译不过去 -->
+                                                <img width="36px" class="media-object" :src="child_comment.user.avatar">
+                                              </a>
+                                            </div>
+
+                                            <div class="media-body">
+                                              <h4 class="media-heading">{{ child_comment.user.name }}
+                                              <small><span class="pull-right">{{ child_comment.created_at }}</span></small> </h4>
+                                              {{ child_comment.content }}<br/>
+                                              <button class="button is-naked delete-button" v-on:click="showCommentsForm(child_comment.id,child_comment.group_id)">回复</button> &nbsp;&nbsp;&nbsp;&nbsp;<a class="fa fa-thumbs-o-up"></a>
+                                           </div>
+
+                                        </div>
+                                     </div>
                                 </div>
-
-
                             </div>
                        </div>
                    </div>
@@ -56,7 +75,7 @@
 <script>
     export default {
         // 为父组件传递到子组件的属性值，子组件使用props方法接收，model为question_id或answer_id
-        props:['type', 'model', 'count', 'comment_id'],
+        props:['type', 'model', 'count', 'comment_id', 'group_id'],
 
         // 模型绑定数据
         data(){
@@ -64,6 +83,7 @@
                 content : '',
                 reply_content : '',
                 comment_id : '',
+                group_id : '',
                 comments :[],
             }
         },
@@ -79,24 +99,52 @@
             // 发送评论
             store(){
                 axios.post('/api/comment', {
-                    'type': this.type, 'model': this.model, 'content': this.content,'reply_content': this.reply_content,'comment_id': this.comment_id
+                    'type': this.type, 'model': this.model, 'content': this.content,'reply_content': this.reply_content,
+                    'comment_id': this.comment_id
                 }).then((response) => {
 
                     // console.log(response);
-                     this.comments.push(response.data)
+                    if(this.comment_id > 0)
+                    {
+                        for(var index in this.comments)
+                      {
+                        if(this.comments[index].id == response.data.group_id)
+                        {
+                            this.comments[index].sub_comments.push(response.data)
+                        }
+                      }
+                    }
+                    else
+                    {
+                      this.comments.push(response.data)
+                    }
+
                      this.content = ''
                      this.reply_content = ''
+                    this.comment_id = ''
+                    this.group_id   = ''
                     $("#reply_comment").modal('hide');
                      this.count ++
 
                 })
             },
-            showCommentsForm(comment_id){
+            showCommentsForm(comment_id, group_id){
                 $("#reply_comment").modal('show');
                 this.comment_id = comment_id;
+                this.group_id   = group_id;
             }
 
         }
 
     }
 </script>
+
+<style lang="scss" scoped>
+
+.media .sub-comment {
+  border: 0px solid #eaeaea;
+
+}
+
+
+</style>

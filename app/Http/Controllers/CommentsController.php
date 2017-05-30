@@ -71,14 +71,41 @@ class CommentsController extends Controller
         // 这里默认暂时写死先
         $type = $this->getModelNameFromType(request('type'));
 
-        // dd(request('comment_id'));
+        // 回复ID
+        $comment_id = (int)request('comment_id');
+        $info = $this->commentRepository->byId($comment_id);
+
+        // 分组ID
+        $group_id = 0;
+        if($comment_id > 0)
+        {
+            if($info['group_id'] > 0)
+            {
+                $group_id = $info['group_id'];
+            }
+            else
+            {
+                if($info['parent_id'] == 0)  // 表示上级回复是一级回复
+                {
+                    $group_id = $info['id'];
+                }
+                else  // 表示上级回复是二级回复
+                {
+                    $group_id = $info['parent_id'];
+                }
+
+            }
+
+        }
+
         // 判断是否回复
         $content = request('reply_content') ? request('reply_content') : request('content');
         $data = [
             'commentable_type' => $type,   // 多态模式
             'commentable_id'   => request('model'), // 多态ID
             'content'          => $content,
-            'parent_id'        => (int)request('comment_id'),
+            'parent_id'        => $comment_id,
+            'group_id'         => $group_id,
             'user_id'          => Auth::guard('api')->user()->id,
         ];
         $comment = $this->commentRepository->create($data);

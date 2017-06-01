@@ -40,8 +40,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        $articles = Article::paginate(5);
-
+        $articles = Article::orderBy('created_at', 'desc')->paginate(5);
 
         foreach($articles as $k => $article)
         {

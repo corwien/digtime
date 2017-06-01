@@ -120,3 +120,8 @@ button.is-naked{
     color:#3097D1;
     text-decoration: none;
 }
+
+/* 日期颜色 */
+.utility-muted {
+    color: #9ba6b5;
+}

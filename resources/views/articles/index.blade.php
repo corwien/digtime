@@ -18,6 +18,7 @@
                             <p>
                                 {{ $article->content }}
                             </p>
+                            <small class="utility-muted">发表于 {{ $article->created_at }}</small>
                         </div>
                     </div>
                 @endforeach

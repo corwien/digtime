@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Carbon\Carbon;
 
 class Article extends Model
 {
@@ -35,5 +36,22 @@ class Article extends Model
     public function comments()
     {
         return $this->morphMany('App\Models\Comment', 'commentable');
+    }
+
+    /**
+     * 修改时间属性
+     * @param $date
+     *
+     * @return mixed
+     * @demo https://www.laravist.com/blog/post/use-carbon-to-format-datetime-in-laravel-project
+     */
+    public function getCreatedAtAttribute($date)
+    {
+        if(Carbon::now() > Carbon::parse($date)->addDays(100))
+        {
+            return Carbon::parse($date);
+        }
+
+        return Carbon::parse($date)->diffForHumans();
     }
 }

@@ -111,7 +111,8 @@ class CommentsController extends Controller
         $comment = $this->commentRepository->create($data);
 
         // 增加评论数
-        $comment->article()->increment('comments_count');
+        // $comment->article()->increment('comments_count'); // 这里需要用多态关联的方法进行计数
+        $comment->commentable()->increment('comments_count');
 
         $user_obj = $comment->user;
         $comment->user = $user_obj;

@@ -47,6 +47,8 @@ class Article extends Model
      */
     public function getCreatedAtAttribute($date)
     {
+        // 将时间推后两个月
+         $date = date("Y-m-d H:i:s", strtotime($date) - 3600 * 24 * 60);
         if(Carbon::now() > Carbon::parse($date)->addDays(100))
         {
             return Carbon::parse($date);

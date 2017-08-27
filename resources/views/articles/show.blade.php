@@ -60,6 +60,7 @@
                 type="article"
                 model="{{ $article->id }}"
                 count="{{ $article->comments_count }}"
+                is_login =  Auth::check()
         ></comments>
     </div>
 

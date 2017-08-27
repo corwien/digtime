@@ -48,14 +48,14 @@
                    </div>
 
                     <!-- Modal Actions -->
-                    <div class="modal-footer">
+                    <div class="modal-footer" v-if="is_login">
                         <textarea class="form-control" rows="5" name="content" v-model="content"></textarea>
 
                         <button type="button" class="btn btn-primary" @click="store">评论</button>
                     </div>
                 </div>
 
-                <div class="modal fade" id="reply_comment" tabindex="-1" role="dialog">
+                <div class="modal fade" id="reply_comment" tabindex="-1" role="dialog" v-if="is_login">
                    <div class="modal-dialog">
                        <div class="modal-content">
                            <!-- Modal Actions -->
@@ -75,7 +75,7 @@
 <script>
     export default {
         // 为父组件传递到子组件的属性值，子组件使用props方法接收，model为question_id或answer_id
-        props:['type', 'model', 'count', 'comment_id', 'group_id'],
+        props:['type', 'model', 'count', 'comment_id', 'group_id', 'is_login'],
 
         // 模型绑定数据
         data(){

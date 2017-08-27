@@ -12,7 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-
+    <!-- qq stats -->
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=46344439" charset="UTF-8"></script>
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([

@@ -20,7 +20,6 @@ Route::get('email/verify/{token}', ['as' => 'email.verify', 'uses' => 'EmailCont
 
 Route::get('/home', 'HomeController@index');
 
-
 // 上传头像
 Route::get('avatar', 'UsersController@avatar');
 Route::post('avatar', 'UsersController@avatarUpload');
@@ -55,3 +54,12 @@ Route::group(['middleware' => 'auth'], function(){
 
 // 评论
 Route::get('article/{id}/comments', 'CommentsController@article');
+
+// Test
+Route::get('/test', function () {
+    return view('test/__test_tools');
+});
+
+Route::any('/wechat', 'WechatController@serve');
+
+

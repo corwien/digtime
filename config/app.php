@@ -190,6 +190,9 @@ return [
         // youdao[20170427]
         JellyBool\Translug\TranslugServiceProvider::class,
 
+        // Wechat[20170827]
+        Overtrue\LaravelWechat\ServiceProvider::class,
+
     ],
 
     /*
@@ -239,7 +242,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        'Translug' => JellyBool\Translug\TranslugFacade::class,
+        'Translug'   => JellyBool\Translug\TranslugFacade::class,
+        'EasyWeChat' => Overtrue\LaravelWechat\Facade::class,
 
     ],
 

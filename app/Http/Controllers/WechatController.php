@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 
 use Log;
 
@@ -15,8 +15,9 @@ class WechatController extends Controller
      */
     public function serve()
     {
+        $ret = json_encode($_REQUEST);
 
-        Log::info('request arrived.'); # 注意：Log 为 Laravel 组件，所以它记的日志去 Laravel 日志看，而不是 EasyWeChat 日志
+        Log::info("request arrived:{$ret}"); # 注意：Log 为 Laravel 组件，所以它记的日志去 Laravel 日志看，而不是 EasyWeChat 日志
 
         $wechat = app('wechat');
         /*
@@ -52,7 +53,7 @@ class WechatController extends Controller
         });
 */
         $wechat->server->setMessageHandler(function($message){
-            return "欢迎关注 overtrue！";
+            return "欢迎关注 Digtime！";
         });
         Log::info('return response.');
 

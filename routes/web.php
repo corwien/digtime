@@ -60,6 +60,14 @@ Route::get('/test', function () {
     return view('test/__test_tools');
 });
 
+
+// 用户控制器
+Route::group(['middleware' => ['web']], function(){
+    Route::get('/users', 'UsersController@users');
+    Route::get('/user/{openId}', 'UsersController@user');
+});
+
+// 微信
 Route::any('/wechat', 'WechatController@serve');
 
 

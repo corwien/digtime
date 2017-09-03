@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\SendReminderEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+use EasyWeChat\Foundation\Application;
 
 class UsersController extends Controller
 {
+    public $wechat;
+
+    public function __construct(Application $wechat)
+    {
+        $this->wechat = $wechat;
+    }
+
     public function show($user_id)
     {
         // 获取用户信息
@@ -47,5 +54,19 @@ class UsersController extends Controller
         user()->save();
 
         return ['url' => user()->avatar];
+    }
+
+    public function users()
+    {
+        $users = $this->wechat->user->lists();
+
+        return $users;
+    }
+
+    public function user($openId)
+    {
+        $user = $this->wechat->user->get($openId);
+
+        return $user;
     }
 }

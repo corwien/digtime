@@ -21,11 +21,12 @@ if(!function_exists('user')) {
 
 if(!function_exists('dump'))
 {
-    function dump($foo)
+    function dump($foo, $is_exit = true)
     {
         echo "<pre>";
         print_r($foo);
         echo "</pre>";
+        if($is_exit) exit();
     }
 }
 

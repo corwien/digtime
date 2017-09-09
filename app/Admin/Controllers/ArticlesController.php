@@ -84,7 +84,8 @@ class ArticlesController extends Controller
         $data = Input::all();
 
         // 将标题处理为slug格式
-        $data['slug'] = app('translug')->translug($data['title']);
+        // $data['slug'] = app('translug')->translug($data['title']);
+        $data['slug'] =  str_random(6) . date("YmdH:i:s");
 
         // 重写方法，并传入参数
         return $this->form()->store_v2($data);
@@ -99,7 +100,8 @@ class ArticlesController extends Controller
         $data = Input::all();
 
         // 将标题处理为slug格式
-        $data['slug'] = app('translug')->translug($data['title']);
+        // $data['slug'] = app('translug')->translug($data['title']);
+        $data['slug'] =  str_random(6) . date("YmdH:i:s");
 
         // 重写方法，并传入参数
         return $this->form()->update_v2($id, $data);

@@ -42,6 +42,7 @@ class ArticlesController extends Controller
     {
         $articles = Article::orderBy('created_at', 'desc')->paginate(10);
 
+
         foreach($articles as $k => $article)
         {
             $content = $this->markdown->markdown($article->content);
@@ -51,6 +52,8 @@ class ArticlesController extends Controller
             $articles[$k]->content = $content;
         }
 
+
+        // dd($articles);
         return view('articles.index', compact('articles'));
     }
 

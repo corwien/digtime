@@ -118,7 +118,12 @@ class ArticlesController extends Controller
 
             $grid->id('ID')->sortable();
             $grid->user_id();
-            $grid->column('title');
+            //  $grid->column('title');
+
+            $grid->title()->display(function($title) {
+                // $title = User::find($userId)->name;
+                return "<a href='/articles/{$this->id}' target='_blank'>{$title}</a>";
+            });
 
             $grid->content()->display(function($content) {
                 return str_limit($content, 30, '...');

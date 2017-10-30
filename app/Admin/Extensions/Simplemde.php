@@ -18,6 +18,7 @@ class Simplemde extends Field
 
     public function render()
     {
+        $unique_id = date("YmdHi").rand(10000, 99999);
         $this->script = <<<EOT
 
  var simplemde = new SimpleMDE({
@@ -25,7 +26,7 @@ class Simplemde extends Field
                 autosave: {
                     enabled: true,
                     delay: 5000,
-                    unique_id: "editor01",
+                    unique_id: "$unique_id",
                 },
                 spellChecker: false,
             });

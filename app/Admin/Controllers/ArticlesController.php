@@ -48,6 +48,9 @@ class ArticlesController extends Controller
             $content->header('header');
             $content->description('description');
 
+            dump($this->form()->edit($id));
+
+
             $content->body($this->form()->edit($id));
         });
     }
